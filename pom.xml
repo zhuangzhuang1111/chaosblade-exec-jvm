@@ -30,6 +30,7 @@
         <module>chaosblade-exec-common</module>
         <module>chaosblade-exec-plugin</module>
         <module>chaosblade-exec-service</module>
+        <module>chaosblade-exec-plugin-mercurykafka</module>
     </modules>
 
     <build>
