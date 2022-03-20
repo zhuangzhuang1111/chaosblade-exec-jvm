@@ -16,7 +16,8 @@ public class RenaultConstants {
     /**
      * Renault 对读写进行拦截
      */
-    public final static String RENAULT_CLASS = "com.tuhu.renault.AbstractCache";
+    //public final static String RENAULT_CLASS = "com.tuhu.renault.AbstractCache";
+    public final static String RENAULT_CLASS = "com.tuhu.renault.redis.lettuce.LettuceCache";
     public final static String GET_METHOD = "do_GET";
     public final static String MULTI_GET_METHOD = "do_MULTI_GET";
     public final static String SET = "do_SET";

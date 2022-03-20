@@ -15,15 +15,8 @@ import java.util.List;
 public class RenaultModeSpec extends FrameworkModelSpec {
 
     public RenaultModeSpec() {
-        addUpdateActionSpec();
+        //addUpdateActionSpec();
         addActionExample();
-    }
-
-    private void addUpdateActionSpec() {
-        UpdateActionSpec actionSpec = new UpdateActionSpec();
-        actionSpec.addMatcherDesc(new RenaultKeyMatcherSpec());
-        actionSpec.addMatcherDesc(new RenaultCmdMatcherSpec());
-        addActionSpec(actionSpec);
     }
 
     private void addActionExample() {
@@ -40,11 +33,11 @@ public class RenaultModeSpec extends FrameworkModelSpec {
                 action.setLongDesc("Renault client throws custom exception experiments");
                 action.setExample("# Do a throws custom exception experiment on Renault `key name lina` command\n" +
                         "blade create renault throwCustomException --exception java.lang.Exception --key name");
-            } else if (action instanceof UpdateActionSpec) {
+            } /*else if (action instanceof UpdateActionSpec) {
                 action.setLongDesc("Renault client update value experiments");
                 action.setExample("# Do a update value experiment on Renault `key name lina` command\n" +
                         "blade create renault update --value \"i'm hacker\" --key name");
-            }
+            }*/
         }
     }
 

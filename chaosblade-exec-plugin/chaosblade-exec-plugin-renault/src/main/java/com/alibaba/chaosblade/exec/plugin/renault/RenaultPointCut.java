@@ -20,7 +20,8 @@ public class RenaultPointCut implements PointCut {
                 .or(new NameClassMatcher("com.ning.http.client.providers.netty.request.NettyRequestSender"))
                 .or(new NameClassMatcher("com.ning.http.client.providers.netty.handler.HttpProtocol"));*/
         //NameClassMatcher nameClassMatcher = new NameClassMatcher(RENAULT_CLASS);
-        return new SuperClassMatcher(RENAULT_CLASS);
+        //return new SuperClassMatcher(RENAULT_CLASS);
+        return new NameClassMatcher(RENAULT_CLASS);
         //return nameClassMatcher;
     }
 

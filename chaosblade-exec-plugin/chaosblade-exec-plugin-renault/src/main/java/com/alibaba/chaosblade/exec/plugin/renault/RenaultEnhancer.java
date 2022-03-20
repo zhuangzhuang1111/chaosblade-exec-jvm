@@ -3,13 +3,10 @@ package com.alibaba.chaosblade.exec.plugin.renault;
 import com.alibaba.chaosblade.exec.common.aop.BeforeEnhancer;
 import com.alibaba.chaosblade.exec.common.aop.EnhancerModel;
 import com.alibaba.chaosblade.exec.common.model.matcher.MatcherModel;
-import com.alibaba.chaosblade.exec.common.util.JsonUtil;
-import com.alibaba.chaosblade.exec.common.util.ReflectUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
-import java.util.List;
 
 import static com.alibaba.chaosblade.exec.plugin.renault.RenaultConstants.CMD;
 import static com.alibaba.chaosblade.exec.plugin.renault.RenaultConstants.KEY;
@@ -28,7 +25,8 @@ public class RenaultEnhancer extends BeforeEnhancer {
                                         Object object,
                                         Method method,
                                         Object[] methodArguments) throws Exception {
-        Object command = methodArguments[1];
+
+/*        Object command = methodArguments[1];
         Object args = ReflectUtil.getFieldValue(command, "command", false);
         Object commandType = ReflectUtil.getFieldValue(args, "type", false);
 
@@ -43,6 +41,17 @@ public class RenaultEnhancer extends BeforeEnhancer {
         matcherModel.add(KEY, key);
         matcherModel.add(CMD, commandType);
         logger.debug("lettuce matchers: {}", JsonUtil.writer().writeValueAsString(matcherModel));
+        return new EnhancerModel(classLoader, matcherModel);
+    }*/
+        /**
+         * MatcherModel
+         * renault
+         *    cmd: set\get                  key: xx
+         *    set:set\setAsync get:getAsync  key:xx
+         */
+        MatcherModel matcherModel = new MatcherModel();
+        matcherModel.add(KEY, "");
+        matcherModel.add(CMD, "");
         return new EnhancerModel(classLoader, matcherModel);
     }
 }
