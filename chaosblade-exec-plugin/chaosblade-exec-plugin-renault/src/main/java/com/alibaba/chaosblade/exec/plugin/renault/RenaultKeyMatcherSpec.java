@@ -1,8 +1,6 @@
-package com.alibaba.chaosblade.exec.plugin.hubble;
+package com.alibaba.chaosblade.exec.plugin.renault;
 
 import com.alibaba.chaosblade.exec.common.model.matcher.BasePredicateMatcherSpec;
-
-import static com.alibaba.chaosblade.exec.plugin.hubble.RenaultConstants.KEY;
 
 /**
  * @author yefei
@@ -11,7 +9,7 @@ public class RenaultKeyMatcherSpec extends BasePredicateMatcherSpec {
 
     @Override
     public String getName() {
-        return KEY;
+        return RenaultConstants.KEY;
     }
 
     @Override

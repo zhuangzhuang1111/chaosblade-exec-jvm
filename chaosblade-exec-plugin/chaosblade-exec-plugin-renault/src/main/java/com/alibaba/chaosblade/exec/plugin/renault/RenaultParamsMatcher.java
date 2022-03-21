@@ -5,7 +5,7 @@
  * use it only in accordance with the terms of the license agreement you entered
  * into with Tuhu.cn
  */
-package com.alibaba.chaosblade.exec.plugin.hubble;
+package com.alibaba.chaosblade.exec.plugin.renault;
 
 import com.alibaba.chaosblade.exec.common.aop.CustomMatcher;
 import org.slf4j.Logger;

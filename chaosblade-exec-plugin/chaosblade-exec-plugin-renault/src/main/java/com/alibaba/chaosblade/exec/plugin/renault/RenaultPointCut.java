@@ -1,12 +1,10 @@
-package com.alibaba.chaosblade.exec.plugin.hubble;
+package com.alibaba.chaosblade.exec.plugin.renault;
 
 import com.alibaba.chaosblade.exec.common.aop.PointCut;
 import com.alibaba.chaosblade.exec.common.aop.matcher.clazz.*;
 import com.alibaba.chaosblade.exec.common.aop.matcher.method.MethodMatcher;
 import com.alibaba.chaosblade.exec.common.aop.matcher.method.NameMethodMatcher;
 import com.alibaba.chaosblade.exec.common.aop.matcher.method.OrMethodMatcher;
-
-import static com.alibaba.chaosblade.exec.plugin.hubble.RenaultConstants.*;
 
 /**
  * @author yefei
@@ -19,7 +17,7 @@ public class RenaultPointCut implements PointCut {
                 .or(new NameClassMatcher("com.ning.http.client.providers.netty.request.NettyRequestSender"))
                 .or(new NameClassMatcher("com.ning.http.client.providers.netty.handler.HttpProtocol"));*/
         //NameClassMatcher nameClassMatcher = new NameClassMatcher(RENAULT_CLASS);
-        return new SuperClassMatcher(RENAULT_CLASS);
+        return new SuperClassMatcher(RenaultConstants.RENAULT_CLASS);
         //return new NameClassMatcher(RENAULT_CLASS);
         //return nameClassMatcher;
     }
@@ -33,9 +31,9 @@ public class RenaultPointCut implements PointCut {
         //NameMethodMatcher nameMethodMatcher = new NameMethodMatcher();
         OrMethodMatcher orMethodMatcher = new OrMethodMatcher();
         return orMethodMatcher
-                .or(new NameMethodMatcher(GET_METHOD))
-                .or(new NameMethodMatcher(MULTI_GET_METHOD))
-                .or(new NameMethodMatcher(SET))
-                .or(new NameMethodMatcher(MULTI_SET_METHOD));
+                .or(new NameMethodMatcher(RenaultConstants.GET_METHOD))
+                .or(new NameMethodMatcher(RenaultConstants.MULTI_GET_METHOD))
+                .or(new NameMethodMatcher(RenaultConstants.SET))
+                .or(new NameMethodMatcher(RenaultConstants.MULTI_SET_METHOD));
     }
 }

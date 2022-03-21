@@ -1,4 +1,4 @@
-package com.alibaba.chaosblade.exec.plugin.hubble;
+package com.alibaba.chaosblade.exec.plugin.renault;
 
 import com.alibaba.chaosblade.exec.common.aop.Enhancer;
 import com.alibaba.chaosblade.exec.common.aop.Plugin;

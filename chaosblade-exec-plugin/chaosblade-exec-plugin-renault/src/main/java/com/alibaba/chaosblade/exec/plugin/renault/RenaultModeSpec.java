@@ -1,4 +1,4 @@
-package com.alibaba.chaosblade.exec.plugin.hubble;
+package com.alibaba.chaosblade.exec.plugin.renault;
 
 import com.alibaba.chaosblade.exec.common.model.FrameworkModelSpec;
 import com.alibaba.chaosblade.exec.common.model.action.ActionSpec;

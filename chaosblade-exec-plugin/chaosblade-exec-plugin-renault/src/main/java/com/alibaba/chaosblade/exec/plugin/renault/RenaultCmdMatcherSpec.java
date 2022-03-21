@@ -1,8 +1,6 @@
-package com.alibaba.chaosblade.exec.plugin.hubble;
+package com.alibaba.chaosblade.exec.plugin.renault;
 
 import com.alibaba.chaosblade.exec.common.model.matcher.BasePredicateMatcherSpec;
-
-import static com.alibaba.chaosblade.exec.plugin.hubble.RenaultConstants.CMD;
 
 /**
  * @author yefei
@@ -12,7 +10,7 @@ public class RenaultCmdMatcherSpec extends BasePredicateMatcherSpec {
 
     @Override
     public String getName() {
-        return CMD;
+        return RenaultConstants.CMD;
     }
 
     @Override
