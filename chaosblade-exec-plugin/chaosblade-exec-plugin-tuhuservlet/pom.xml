@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>chaosblade-exec-plugin-tuhu-servlet</artifactId>
+    <artifactId>chaosblade-exec-plugin-tuhuservlet</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
