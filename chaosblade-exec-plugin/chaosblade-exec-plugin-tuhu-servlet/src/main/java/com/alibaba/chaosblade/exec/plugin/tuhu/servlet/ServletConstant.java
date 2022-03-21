@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.alibaba.chaosblade.exec.plugin.servlet;
+package com.alibaba.chaosblade.exec.plugin.tuhu.servlet;
 
 /**
  * @author Changjun Xiao
  */
-public interface TuhuServletConstant {
+public interface ServletConstant {
 
     String QUERY_STRING_KEY = "querystring";
 
@@ -31,7 +31,7 @@ public interface TuhuServletConstant {
 
     String REQUEST_PATH_REGEX_PATTERN_KEY = "requestpath-regex-pattern";
 
-    String TARGET_NAME = "servlet";
+    String TARGET_NAME = "tuhu-servlet";
 
     String EQUALS_SYMBOL = "=";
 

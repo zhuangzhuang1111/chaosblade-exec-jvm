@@ -49,6 +49,7 @@
         <module>chaosblade-exec-plugin-log</module>
         <module>chaosblade-exec-plugin-renault</module>
         <module>chaosblade-exec-plugin-hubble</module>
+        <module>chaosblade-exec-plugin-tuhu-servlet</module>
     </modules>
 
     <dependencies>

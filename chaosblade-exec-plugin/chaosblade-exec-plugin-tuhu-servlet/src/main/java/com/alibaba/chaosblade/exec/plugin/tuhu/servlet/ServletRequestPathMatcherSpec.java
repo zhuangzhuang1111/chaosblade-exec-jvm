@@ -14,23 +14,20 @@
  * limitations under the License.
  */
 
-package com.alibaba.chaosblade.exec.plugin.servlet;
+package com.alibaba.chaosblade.exec.plugin.tuhu.servlet;
 
 import com.alibaba.chaosblade.exec.common.model.matcher.BasePredicateMatcherSpec;
 
-/**
- * @author Changjun Xiao
- */
-public class ServletQueryStringMatcherSpec extends BasePredicateMatcherSpec {
+public class ServletRequestPathMatcherSpec extends BasePredicateMatcherSpec {
 
     @Override
     public String getName() {
-        return TuhuServletConstant.QUERY_STRING_KEY;
+        return ServletConstant.REQUEST_PATH_KEY;
     }
 
     @Override
     public String getDesc() {
-        return "The query string that is contained in the request URL after the path.";
+        return "equal RequestUri without ContextPath";
     }
 
     @Override
@@ -42,4 +39,5 @@ public class ServletQueryStringMatcherSpec extends BasePredicateMatcherSpec {
     public boolean required() {
         return false;
     }
+
 }

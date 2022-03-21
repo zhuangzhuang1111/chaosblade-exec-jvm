@@ -1,4 +1,4 @@
-package com.alibaba.chaosblade.exec.plugin.servlet.code;
+package com.alibaba.chaosblade.exec.plugin.tuhu.servlet.code;
 
 import com.alibaba.chaosblade.exec.common.aop.PredicateResult;
 import com.alibaba.chaosblade.exec.common.constant.CategoryConstants;

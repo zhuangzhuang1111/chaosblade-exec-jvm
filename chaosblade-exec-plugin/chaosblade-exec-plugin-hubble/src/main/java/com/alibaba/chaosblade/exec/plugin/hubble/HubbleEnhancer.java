@@ -31,17 +31,24 @@ public class HubbleEnhancer extends BeforeEnhancer {
         MatcherModel matcherModel = new MatcherModel();
         String methodName = ReflectUtil.getFieldValue(methodArguments[0], "method", false);
         // hubble -> support create\get\delete
-        if (methodName.equalsIgnoreCase("create")) {
+        String endPoint = ReflectUtil.getFieldValue(methodArguments[0], "endpoint", false);
+
+        String[] split = endPoint.split("/");
+        String index = split[1]; // common_test
+        String type = split[2]; // _doc | _bulk  _health(健康检查)
+        if (type.equalsIgnoreCase("_doc") && methodName.equalsIgnoreCase("POST")) {
             matcherModel.add(CMD, "create");
-        } else if(methodName.equalsIgnoreCase("update")){
+        } else if(methodName.equalsIgnoreCase("_bulk") && methodName.equalsIgnoreCase("POST") ) {
+            matcherModel.add(CMD, "create");
+        } else if (type.equalsIgnoreCase("_update")) {
             matcherModel.add(CMD, "update");
-        } else if(methodName.equalsIgnoreCase("query")){
+        } else if (methodName.equalsIgnoreCase("search")) {
             matcherModel.add(CMD, "query");
+        } else if(methodName.equalsIgnoreCase("_doc") && methodName.equalsIgnoreCase("GET")){
+            matcherModel.add(CMD, "query"); // not match in the end
         }
-        HashMap<String, String> clientParam = ReflectUtil.getFieldValue(methodArguments[0], "clientParam", false);
-        HashSet<String> keySet = (HashSet<String>) clientParam.keySet();
+        matcherModel.add(KEY, index);
         EnhancerModel enhancerModel = new EnhancerModel(classLoader, matcherModel);
-        enhancerModel.addCustomMatcher(KEY, keySet, HubbleParamsMatcher.getInstance());
         return enhancerModel;
     }
 }

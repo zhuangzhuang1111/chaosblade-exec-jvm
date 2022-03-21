@@ -14,32 +14,35 @@
  * limitations under the License.
  */
 
-package com.alibaba.chaosblade.exec.plugin.servlet;
+package com.alibaba.chaosblade.exec.plugin.tuhu.servlet;
 
-import com.alibaba.chaosblade.exec.common.model.matcher.BasePredicateMatcherSpec;
+import com.alibaba.chaosblade.exec.common.aop.Enhancer;
+import com.alibaba.chaosblade.exec.common.aop.Plugin;
+import com.alibaba.chaosblade.exec.common.aop.PointCut;
+import com.alibaba.chaosblade.exec.common.model.ModelSpec;
 
 /**
  * @author Changjun Xiao
  */
-public class ServletMethodMatcherSpec extends BasePredicateMatcherSpec {
+public class ServletPlugin implements Plugin {
 
     @Override
     public String getName() {
-        return TuhuServletConstant.METHOD_KEY;
+        return ServletConstant.TARGET_NAME;
     }
 
     @Override
-    public String getDesc() {
-        return "The name of the HTTP method with which this request was made, for example, GET, POST, or PUT.";
+    public ModelSpec getModelSpec() {
+        return new ServletModelSpec();
     }
 
     @Override
-    public boolean noArgs() {
-        return false;
+    public PointCut getPointCut() {
+        return new ServletPointCut();
     }
 
     @Override
-    public boolean required() {
-        return false;
+    public Enhancer getEnhancer() {
+        return new ServletEnhancer();
     }
 }

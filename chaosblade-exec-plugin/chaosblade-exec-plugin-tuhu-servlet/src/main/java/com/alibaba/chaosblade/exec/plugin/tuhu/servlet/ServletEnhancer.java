@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.alibaba.chaosblade.exec.plugin.servlet;
+package com.alibaba.chaosblade.exec.plugin.tuhu.servlet;
 
 import com.alibaba.chaosblade.exec.common.aop.BeforeEnhancer;
 import com.alibaba.chaosblade.exec.common.aop.EnhancerModel;
@@ -34,31 +34,31 @@ import java.util.Set;
 /**
  * @author Changjun Xiao
  */
-public class MercuryServletEnhancer extends BeforeEnhancer {
+public class ServletEnhancer extends BeforeEnhancer {
 
-    private static final Logger LOOGER = LoggerFactory.getLogger(MercuryServletEnhancer.class);
+    private static final Logger LOOGER = LoggerFactory.getLogger(ServletEnhancer.class);
 
     @Override
     public EnhancerModel doBeforeAdvice(ClassLoader classLoader, String className, Object object,
                                         Method method, Object[] methodArguments)
             throws Exception {
-        Object request = methodArguments[0];
-        String requestURI = ReflectUtil.invokeMethod(request, TuhuServletConstant.GET_REQUEST_URI, new Object[]{}, false);
-        String requestMethod = ReflectUtil.invokeMethod(request, TuhuServletConstant.GET_METHOD, new Object[]{}, false);
+        Object request = methodArguments[0]; // HttpServletRequest
+        String requestURI = ReflectUtil.invokeMethod(request, ServletConstant.GET_REQUEST_URI, new Object[]{}, false);
+        String requestMethod = ReflectUtil.invokeMethod(request, ServletConstant.GET_METHOD, new Object[]{}, false);
 
         MatcherModel matcherModel = new MatcherModel();
-        matcherModel.add(TuhuServletConstant.METHOD_KEY, requestMethod);
-        matcherModel.add(TuhuServletConstant.REQUEST_PATH_KEY, requestURI);
-        matcherModel.add(TuhuServletConstant.REQUEST_PATH_REGEX_PATTERN_KEY, requestURI);
+        matcherModel.add(ServletConstant.METHOD_KEY, requestMethod);
+        matcherModel.add(ServletConstant.REQUEST_PATH_KEY, requestURI);
+        matcherModel.add(ServletConstant.REQUEST_PATH_REGEX_PATTERN_KEY, requestURI);
         LOOGER.debug("servlet matchers: {}", JsonUtil.writer().writeValueAsString(matcherModel));
 
         Map<String, Object> queryString = getQueryString(requestMethod, request);
         LOOGER.debug("origin params: {}", JsonUtil.writer().writeValueAsString(queryString));
 
         EnhancerModel enhancerModel = new EnhancerModel(classLoader, matcherModel);
-        enhancerModel.addCustomMatcher(TuhuServletConstant.QUERY_STRING_KEY, queryString,
+        enhancerModel.addCustomMatcher(ServletConstant.QUERY_STRING_KEY, queryString,
                 ServletParamsMatcher.getInstance());
-        enhancerModel.addCustomMatcher(TuhuServletConstant.QUERY_STRING_REGEX_PATTERN_KEY, queryString,
+        enhancerModel.addCustomMatcher(ServletConstant.QUERY_STRING_REGEX_PATTERN_KEY, queryString,
                 ServletParamsMatcher.getInstance());
         return enhancerModel;
     }
@@ -66,20 +66,20 @@ public class MercuryServletEnhancer extends BeforeEnhancer {
     private Map<String, Object> getQueryString(String method, Object request) throws Exception {
         Map<String, Object> params = new HashMap<String, Object>();
         if ("get".equalsIgnoreCase(method)) {
-            String queryString = ReflectUtil.invokeMethod(request, TuhuServletConstant.GET_QUERY_STRING, new Object[]{},
+            String queryString = ReflectUtil.invokeMethod(request, ServletConstant.GET_QUERY_STRING, new Object[]{},
                     false);
             if (StringUtils.isNotBlank(queryString)) {
                 queryString = URLDecoder.decode(queryString, System.getProperty("file.encoding"));
-                String[] paramsStr = queryString.split(TuhuServletConstant.AND_SYMBOL);
+                String[] paramsStr = queryString.split(ServletConstant.AND_SYMBOL);
                 for (String s : paramsStr) {
-                    int i = s.indexOf(TuhuServletConstant.EQUALS_SYMBOL);
+                    int i = s.indexOf(ServletConstant.EQUALS_SYMBOL);
                     if (i != -1) {
                         params.put(s.substring(0, i), s.substring(i + 1));
                     }
                 }
             }
         } else {
-            Map<String, String[]> parameterMap = ReflectUtil.invokeMethod(request, TuhuServletConstant.GET_PARAMETER_MAP,
+            Map<String, String[]> parameterMap = ReflectUtil.invokeMethod(request, ServletConstant.GET_PARAMETER_MAP,
                     new Object[]{}, false);
             Set<Map.Entry<String, String[]>> entries = parameterMap.entrySet();
             for (Map.Entry<String, String[]> entry : entries) {

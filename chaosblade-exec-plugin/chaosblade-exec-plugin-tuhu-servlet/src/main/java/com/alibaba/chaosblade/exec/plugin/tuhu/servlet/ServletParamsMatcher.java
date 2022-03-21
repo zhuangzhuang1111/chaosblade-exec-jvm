@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.alibaba.chaosblade.exec.plugin.servlet;
+package com.alibaba.chaosblade.exec.plugin.tuhu.servlet;
 
 import com.alibaba.chaosblade.exec.common.aop.CustomMatcher;
 import org.slf4j.Logger;
@@ -43,9 +43,9 @@ public class ServletParamsMatcher implements CustomMatcher {
     @Override
     public boolean match(String queryString, Object originValue) {
         Map<String, Object> value = (Map<String, Object>) originValue;
-        String[] paramsStr = queryString.split(TuhuServletConstant.AND_SYMBOL);
+        String[] paramsStr = queryString.split(ServletConstant.AND_SYMBOL);
         for (String s : paramsStr) {
-            int i = s.indexOf(TuhuServletConstant.EQUALS_SYMBOL);
+            int i = s.indexOf(ServletConstant.EQUALS_SYMBOL);
             if (i == -1) {
                 return false;
             }
@@ -66,9 +66,9 @@ public class ServletParamsMatcher implements CustomMatcher {
     @Override
     public boolean regexMatch(String queryString, Object originValue) {
         Map<String, Object> value = (Map<String, Object>) originValue;
-        String[] paramsStr = queryString.split(TuhuServletConstant.AND_SYMBOL);
+        String[] paramsStr = queryString.split(ServletConstant.AND_SYMBOL);
         for (String s : paramsStr) {
-            int i = s.indexOf(TuhuServletConstant.EQUALS_SYMBOL);
+            int i = s.indexOf(ServletConstant.EQUALS_SYMBOL);
             if (i == -1) {
                 return false;
             }

@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.alibaba.chaosblade.exec.plugin.servlet;
+package com.alibaba.chaosblade.exec.plugin.tuhu.servlet;
 
 import com.alibaba.chaosblade.exec.common.model.FrameworkModelSpec;
 import com.alibaba.chaosblade.exec.common.model.action.ActionSpec;
 import com.alibaba.chaosblade.exec.common.model.action.delay.DelayActionSpec;
 import com.alibaba.chaosblade.exec.common.model.action.exception.ThrowCustomExceptionActionSpec;
 import com.alibaba.chaosblade.exec.common.model.matcher.MatcherSpec;
-import com.alibaba.chaosblade.exec.plugin.servlet.code.ModifyHttpCodeActionSpec;
+import com.alibaba.chaosblade.exec.plugin.tuhu.servlet.code.ModifyHttpCodeActionSpec;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +69,7 @@ public class ServletModelSpec extends FrameworkModelSpec {
 
     @Override
     public String getTarget() {
-        return TuhuServletConstant.TARGET_NAME;
+        return ServletConstant.TARGET_NAME;
     }
 
     @Override
