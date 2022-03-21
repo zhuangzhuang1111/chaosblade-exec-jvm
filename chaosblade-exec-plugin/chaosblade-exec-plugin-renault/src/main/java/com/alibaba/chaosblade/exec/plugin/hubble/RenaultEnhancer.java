@@ -1,4 +1,4 @@
-package com.alibaba.chaosblade.exec.plugin.renault;
+package com.alibaba.chaosblade.exec.plugin.hubble;
 
 import com.alibaba.chaosblade.exec.common.aop.BeforeEnhancer;
 import com.alibaba.chaosblade.exec.common.aop.EnhancerModel;
@@ -7,9 +7,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.HashSet;
 
-import static com.alibaba.chaosblade.exec.plugin.renault.RenaultConstants.CMD;
-import static com.alibaba.chaosblade.exec.plugin.renault.RenaultConstants.KEY;
+import static com.alibaba.chaosblade.exec.plugin.hubble.RenaultConstants.*;
 
 
 /**
@@ -50,8 +51,26 @@ public class RenaultEnhancer extends BeforeEnhancer {
          *    set:set\setAsync get:getAsync  key:xx
          */
         MatcherModel matcherModel = new MatcherModel();
-        matcherModel.add(KEY, "");
-        matcherModel.add(CMD, "");
-        return new EnhancerModel(classLoader, matcherModel);
+        HashSet<Object> keySet = new HashSet();
+        if (method.getName().contains("GET")) {
+            if (method.getName().equals(MULTI_GET_METHOD)) {
+                keySet = (HashSet<Object>) methodArguments[0];
+            } else {
+                keySet.add(methodArguments[0]);
+            }
+            matcherModel.add(CMD, "GET");
+        } else if (method.getName().contains("SET")) {
+            if (method.getName().equals(MULTI_SET_METHOD)) {
+                HashMap<Object, Object> setData = (HashMap<Object, Object>) methodArguments[0];
+                keySet = (HashSet<Object>) setData.keySet();
+            } else {
+                keySet.add(methodArguments[0]);
+            }
+            matcherModel.add(CMD, "SET");
+        }
+
+        EnhancerModel enhancerModel = new EnhancerModel(classLoader, matcherModel);
+        enhancerModel.addCustomMatcher(KEY, keySet, RenaultParamsMatcher.getInstance());
+        return enhancerModel;
     }
 }

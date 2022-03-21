@@ -1,22 +1,23 @@
-package com.alibaba.chaosblade.exec.plugin.renault;
+package com.alibaba.chaosblade.exec.plugin.hubble;
 
 import com.alibaba.chaosblade.exec.common.model.matcher.BasePredicateMatcherSpec;
 
-import static com.alibaba.chaosblade.exec.plugin.renault.RenaultConstants.KEY;
+import static com.alibaba.chaosblade.exec.plugin.hubble.HubbleConstants.CMD;
 
 /**
  * @author yefei
+ * @create 2020-11-23 14:53
  */
-public class RenaultKeyMatcherSpec extends BasePredicateMatcherSpec {
+public class HubbleCmdMatcherSpec extends BasePredicateMatcherSpec {
 
     @Override
     public String getName() {
-        return KEY;
+        return CMD;
     }
 
     @Override
     public String getDesc() {
-        return "key matcher";
+        return "cmd matcher";
     }
 
     @Override

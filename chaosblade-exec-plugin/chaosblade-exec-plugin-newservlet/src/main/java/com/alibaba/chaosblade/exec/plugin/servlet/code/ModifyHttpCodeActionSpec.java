@@ -1,4 +1,4 @@
-package com.alibaba.chaosblade.exec.plugin.renault;
+package com.alibaba.chaosblade.exec.plugin.servlet.code;
 
 import com.alibaba.chaosblade.exec.common.aop.PredicateResult;
 import com.alibaba.chaosblade.exec.common.constant.CategoryConstants;
@@ -13,22 +13,22 @@ import java.util.List;
 /**
  * @author yefei
  */
-public class SetActionSpec extends BaseActionSpec {
+public class ModifyHttpCodeActionSpec extends BaseActionSpec {
 
-    private final static RenaultValueFlagSpec VALUE_FLAG_SPEC = new RenaultValueFlagSpec();
+    private final static HttpCodeFlagSpec HTTP_CODE_FLAG_SPEC = new HttpCodeFlagSpec();
 
-    public SetActionSpec() {
-        super(new RenaultActionExecutor(VALUE_FLAG_SPEC));
+    public ModifyHttpCodeActionSpec() {
+        super(new ModifyHttpCodeActionExecutor(HTTP_CODE_FLAG_SPEC));
     }
 
     @Override
     public String getName() {
-        return "update";
+        return "modifyCode";
     }
 
     @Override
     public String[] getAliases() {
-        return new String[0];
+        return new String[]{"mc"};
     }
 
     @Override
@@ -44,14 +44,14 @@ public class SetActionSpec extends BaseActionSpec {
     @Override
     public List<FlagSpec> getActionFlags() {
         List<FlagSpec> flagSpecs = new ArrayList<FlagSpec>();
-        flagSpecs.add(VALUE_FLAG_SPEC);
+        flagSpecs.add(HTTP_CODE_FLAG_SPEC);
         return flagSpecs;
     }
 
     @Override
     public PredicateResult predicate(ActionModel actionModel) {
-        if (StringUtil.isBlank(actionModel.getFlag(VALUE_FLAG_SPEC.getName()))) {
-            return PredicateResult.fail("less value argument");
+        if (StringUtil.isBlank(actionModel.getFlag(HTTP_CODE_FLAG_SPEC.getName()))) {
+            return PredicateResult.fail("less http code argument");
         }
         return PredicateResult.success();
     }

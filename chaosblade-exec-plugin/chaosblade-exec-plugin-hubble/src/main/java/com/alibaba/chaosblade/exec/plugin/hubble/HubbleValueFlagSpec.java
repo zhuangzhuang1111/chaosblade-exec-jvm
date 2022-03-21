@@ -1,13 +1,13 @@
-package com.alibaba.chaosblade.exec.plugin.renault;
+package com.alibaba.chaosblade.exec.plugin.hubble;
 
 import com.alibaba.chaosblade.exec.common.model.FlagSpec;
 
-import static com.alibaba.chaosblade.exec.plugin.renault.RenaultConstants.VALUE;
+import static com.alibaba.chaosblade.exec.plugin.hubble.HubbleConstants.VALUE;
 
 /**
  * @author yefei
  */
-public class RenaultValueFlagSpec implements FlagSpec {
+public class HubbleValueFlagSpec implements FlagSpec {
 
     @Override
     public String getName() {

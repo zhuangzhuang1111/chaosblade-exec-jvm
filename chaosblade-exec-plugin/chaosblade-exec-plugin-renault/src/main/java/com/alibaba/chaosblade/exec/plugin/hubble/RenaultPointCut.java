@@ -1,13 +1,12 @@
-package com.alibaba.chaosblade.exec.plugin.renault;
+package com.alibaba.chaosblade.exec.plugin.hubble;
 
 import com.alibaba.chaosblade.exec.common.aop.PointCut;
-import com.alibaba.chaosblade.exec.common.aop.matcher.MethodInfo;
 import com.alibaba.chaosblade.exec.common.aop.matcher.clazz.*;
 import com.alibaba.chaosblade.exec.common.aop.matcher.method.MethodMatcher;
 import com.alibaba.chaosblade.exec.common.aop.matcher.method.NameMethodMatcher;
 import com.alibaba.chaosblade.exec.common.aop.matcher.method.OrMethodMatcher;
 
-import static com.alibaba.chaosblade.exec.plugin.renault.RenaultConstants.*;
+import static com.alibaba.chaosblade.exec.plugin.hubble.RenaultConstants.*;
 
 /**
  * @author yefei
@@ -20,8 +19,8 @@ public class RenaultPointCut implements PointCut {
                 .or(new NameClassMatcher("com.ning.http.client.providers.netty.request.NettyRequestSender"))
                 .or(new NameClassMatcher("com.ning.http.client.providers.netty.handler.HttpProtocol"));*/
         //NameClassMatcher nameClassMatcher = new NameClassMatcher(RENAULT_CLASS);
-        //return new SuperClassMatcher(RENAULT_CLASS);
-        return new NameClassMatcher(RENAULT_CLASS);
+        return new SuperClassMatcher(RENAULT_CLASS);
+        //return new NameClassMatcher(RENAULT_CLASS);
         //return nameClassMatcher;
     }
 

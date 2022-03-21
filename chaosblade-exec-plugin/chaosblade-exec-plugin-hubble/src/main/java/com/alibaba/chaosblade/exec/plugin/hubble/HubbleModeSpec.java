@@ -1,4 +1,4 @@
-package com.alibaba.chaosblade.exec.plugin.renault;
+package com.alibaba.chaosblade.exec.plugin.hubble;
 
 import com.alibaba.chaosblade.exec.common.model.FrameworkModelSpec;
 import com.alibaba.chaosblade.exec.common.model.action.ActionSpec;
@@ -12,9 +12,9 @@ import java.util.List;
 /**
  * @author yefei
  */
-public class RenaultModeSpec extends FrameworkModelSpec {
+public class HubbleModeSpec extends FrameworkModelSpec {
 
-    public RenaultModeSpec() {
+    public HubbleModeSpec() {
         //addUpdateActionSpec();
         addActionExample();
     }
@@ -23,14 +23,14 @@ public class RenaultModeSpec extends FrameworkModelSpec {
         List<ActionSpec> actions = getActions();
         for (ActionSpec action : actions) {
             if (action instanceof DelayActionSpec) {
-                action.setLongDesc("Renault client delay experiments");
+                action.setLongDesc("Hubble client delay experiments");
                 action.setExample("# Do a delay 2s experiment on Renault `hset key name lina` command\n" +
                         "blade create renault delay --cmd hset --key name --time 2000\n\n" +
 
                         "#Do a delay 2s experiment on Jedis `key name lina` command\n" +
                         "blade create renault delay --key name --time 2000");
             } else if (action instanceof ThrowCustomExceptionActionSpec) {
-                action.setLongDesc("Renault client throws custom exception experiments");
+                action.setLongDesc("Hubble client throws custom exception experiments");
                 action.setExample("# Do a throws custom exception experiment on Renault `key name lina` command\n" +
                         "blade create renault throwCustomException --exception java.lang.Exception --key name");
             } /*else if (action instanceof UpdateActionSpec) {
@@ -44,8 +44,8 @@ public class RenaultModeSpec extends FrameworkModelSpec {
     @Override
     public List<MatcherSpec> createNewMatcherSpecs() {
         List<MatcherSpec> matchers = new ArrayList<MatcherSpec>();
-        matchers.add(new RenaultKeyMatcherSpec());
-        matchers.add(new RenaultCmdMatcherSpec());
+        matchers.add(new HubbleKeyMatcherSpec());
+        matchers.add(new HubbleCmdMatcherSpec());
         return matchers;
     }
 
