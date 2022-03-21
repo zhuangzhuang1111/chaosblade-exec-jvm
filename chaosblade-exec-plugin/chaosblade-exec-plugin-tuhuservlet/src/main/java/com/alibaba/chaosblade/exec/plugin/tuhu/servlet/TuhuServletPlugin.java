@@ -24,7 +24,7 @@ import com.alibaba.chaosblade.exec.common.model.ModelSpec;
 /**
  * @author Changjun Xiao
  */
-public class ServletPlugin implements Plugin {
+public class TuhuServletPlugin implements Plugin {
 
     @Override
     public String getName() {
