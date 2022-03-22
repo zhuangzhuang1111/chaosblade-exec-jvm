@@ -26,15 +26,11 @@ public class MercuryConsumerEnhancer extends BeforeEnhancer implements MercuryCo
             return null;
         }
 
-        if (KAFKA_CONSUME_METHOD.equals(method.getName())) {
-            // com.tuhu.mercury.enhance.kafka.consume.OrdinalConsumeTaskRequest #processConsumeStatus
-
-        } else { // com.tuhu.mercury.consumer.ConsumerRmqImpl #processMessage
-
-        }
-
+        Object subscriptionName = ReflectUtil.getFieldValue(object, "subscription", false);
         MatcherModel matcherModel = new MatcherModel();
-        matcherModel.add(RESOURCE_NAME, "1.kafka.sub");
+        if (subscriptionName != null && !subscriptionName.equals("")) {
+            matcherModel.add(RESOURCE_NAME, subscriptionName);
+        }
 
         EnhancerModel enhancerModel = new EnhancerModel(classLoader, matcherModel);
         enhancerModel.addMatcher(CONSUMER_KEY, "true");
