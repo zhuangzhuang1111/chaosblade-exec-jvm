@@ -26,37 +26,15 @@ public class MercuryConsumerEnhancer extends BeforeEnhancer implements MercuryCo
             return null;
         }
 
-        HashSet<String> topicKeySet = new HashSet<String>();
         if (KAFKA_CONSUME_METHOD.equals(method.getName())) {
-            List<Object> messages = (List<Object>) methodArguments[0]; // List<KafkaMessage> messages
-            for(Object obj : messages){
-                //
-                Object metadata = ReflectUtil.getFieldValue(obj, "metadata", false);
-            }
-            Object metadata = ReflectUtil.getFieldValue(object, "metadata", false);
-            Object subscription = ReflectUtil.getFieldValue(metadata, "subscription", false);
-            if (subscription != null) {
-                Object subscriptionList = ReflectUtil.getFieldValue(subscription, "subscription", false);
-                if (subscriptionList != null) {
-                    topicKeySet = (HashSet<String>) subscriptionList;
-                }
-            }else{
-                Map<String, Object> topics = (Map<String, Object>) ReflectUtil.getFieldValue(metadata, "topics", false);
-                Iterator<String> iterator = topics.keySet().iterator();
-                while (iterator.hasNext()){
-                    topicKeySet.add(iterator.next());
-                }
-            }
+            // com.tuhu.mercury.enhance.kafka.consume.OrdinalConsumeTaskRequest #processConsumeStatus
+
+        } else { // com.tuhu.mercury.consumer.ConsumerRmqImpl #processMessage
+
         }
 
         MatcherModel matcherModel = new MatcherModel();
-
-        for (String item : topicKeySet) {
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("consumer topicKey: {}, matcherModel: {}", item, matcherModel.getMatchers());
-            }
-            matcherModel.add(TOPIC_KEY, item);
-        }
+        matcherModel.add(RESOURCE_NAME, "1.kafka.sub");
 
         EnhancerModel enhancerModel = new EnhancerModel(classLoader, matcherModel);
         enhancerModel.addMatcher(CONSUMER_KEY, "true");

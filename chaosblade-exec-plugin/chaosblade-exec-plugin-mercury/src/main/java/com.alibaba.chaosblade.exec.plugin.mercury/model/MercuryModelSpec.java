@@ -43,7 +43,7 @@ public class MercuryModelSpec extends FrameworkModelSpec implements MercuryConst
         ArrayList<MatcherSpec> arrayList = new ArrayList<MatcherSpec>();
         arrayList.add(new MercuryConsumerMatcherSpec());
         arrayList.add(new MercuryProducerMatcherSpec());
-        arrayList.add(new TopicMatcherSpec());
+        arrayList.add(new ResourceNameMatcherSpec());
         return arrayList;
     }
 

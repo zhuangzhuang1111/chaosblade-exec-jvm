@@ -10,7 +10,7 @@ import com.alibaba.chaosblade.exec.plugin.mercury.MercuryPlugin;
 public class MercuryProducerPlugin extends MercuryPlugin {
     @Override
     public String getName() {
-        return "producer";
+        return "topic";
     }
 
     @Override

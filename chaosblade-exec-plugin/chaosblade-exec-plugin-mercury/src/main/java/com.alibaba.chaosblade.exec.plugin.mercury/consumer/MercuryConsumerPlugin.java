@@ -10,7 +10,7 @@ import com.alibaba.chaosblade.exec.plugin.mercury.MercuryPlugin;
 public class MercuryConsumerPlugin extends MercuryPlugin {
     @Override
     public String getName() {
-        return "consumer";
+        return "subscription";
     }
 
     @Override

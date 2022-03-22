@@ -25,10 +25,9 @@ public class MercuryProducerEnhancer extends BeforeEnhancer implements MercuryCo
             return null;
         }
 
-        Object topicKeyObject = methodArguments[0];
-        String topicKey = ReflectUtil.getFieldValue(topicKeyObject, "topic", false);
+        String topicKey = ReflectUtil.getFieldValue(object, "topicName", false);
         MatcherModel matcherModel = new MatcherModel();
-        matcherModel.add(TOPIC_KEY, topicKey);
+        matcherModel.add(RESOURCE_NAME, topicKey);
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("producer topicKey: {}, matcherModel: {}", topicKey, matcherModel);
         }

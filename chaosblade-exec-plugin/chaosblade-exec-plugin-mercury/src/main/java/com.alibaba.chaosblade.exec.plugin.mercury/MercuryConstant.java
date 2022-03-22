@@ -11,9 +11,8 @@ public interface MercuryConstant {
 
     String CONSUMER_KEY = "subscription";
 
-    String TOPIC_KEY = "topic";
+    String RESOURCE_NAME = "name";
 
-    //String PRODUCER_CLASS = "org.apache.kafka.clients.producer.KafkaProducer";
     String KAFKA_PRODUCER_CLASS = "com.tuhu.mercury.producer.ProducerKafkaImpl";
     String RABBITMQ_PRODUCER_CLASS = "com.tuhu.mercury.producer.ProducerRmqImpl";
 
