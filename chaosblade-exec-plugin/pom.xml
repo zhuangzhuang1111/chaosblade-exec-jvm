@@ -50,6 +50,7 @@
         <module>chaosblade-exec-plugin-renault</module>
         <module>chaosblade-exec-plugin-hubble</module>
         <module>chaosblade-exec-plugin-tuhuservlet</module>
+        <module>chaosblade-exec-plugin-mercury</module>
     </modules>
 
     <dependencies>

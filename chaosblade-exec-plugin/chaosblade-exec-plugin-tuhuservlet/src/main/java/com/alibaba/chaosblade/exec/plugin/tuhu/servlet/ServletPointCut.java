@@ -36,7 +36,7 @@ public class ServletPointCut implements PointCut {
     //public static final String SPRING_HTTP_SERVLET_BEAN = "org.springframework.web.servlet.HttpServletBean";
     //public static final String HTTP_SERVLET = "javax.servlet.http.HttpServlet";
     public static final String HTTP_SERVLET = "org.springframework.web.servlet.DispatcherServlet";
-    public static final String METHOD = "doService";
+    public static final String METHOD = "doDispatch";
 
     public static Set<String> enhanceMethodSet = new HashSet<String>();
     public static Set<String> enhanceMethodFilterSet = new HashSet<String>();

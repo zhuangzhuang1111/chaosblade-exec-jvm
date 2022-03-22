@@ -38,13 +38,13 @@ public class HubbleEnhancer extends BeforeEnhancer {
         String type = split[2]; // _doc | _bulk  _health(健康检查)
         if (type.equalsIgnoreCase("_doc") && methodName.equalsIgnoreCase("POST")) {
             matcherModel.add(CMD, "create");
-        } else if(methodName.equalsIgnoreCase("_bulk") && methodName.equalsIgnoreCase("POST") ) {
+        } else if(type.equalsIgnoreCase("_bulk") && methodName.equalsIgnoreCase("POST") ) {
             matcherModel.add(CMD, "create");
         } else if (type.equalsIgnoreCase("_update")) {
             matcherModel.add(CMD, "update");
-        } else if (methodName.equalsIgnoreCase("search")) {
+        } else if (type.equalsIgnoreCase("_search")) {
             matcherModel.add(CMD, "query");
-        } else if(methodName.equalsIgnoreCase("_doc") && methodName.equalsIgnoreCase("GET")){
+        } else if(type.equalsIgnoreCase("_doc") && methodName.equalsIgnoreCase("GET")){
             matcherModel.add(CMD, "query"); // not match in the end
         }
         matcherModel.add(KEY, index);
