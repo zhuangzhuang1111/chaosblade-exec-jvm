@@ -2,7 +2,6 @@ package com.alibaba.chaosblade.exec.plugin.mercury.consumer;
 
 import com.alibaba.chaosblade.exec.common.aop.Enhancer;
 import com.alibaba.chaosblade.exec.common.aop.PointCut;
-import com.alibaba.chaosblade.exec.plugin.kafka.consumer.MercuryConsumerPointCut;
 import com.alibaba.chaosblade.exec.plugin.mercury.MercuryPlugin;
 
 /**

@@ -1,0 +1,2 @@
+com.alibaba.chaosblade.exec.plugin.mercury.consumer.MercuryConsumerPlugin
+com.alibaba.chaosblade.exec.plugin.mercury.producer.MercuryProducerPlugin

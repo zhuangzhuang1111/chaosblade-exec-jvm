@@ -4,6 +4,7 @@ import com.alibaba.chaosblade.exec.common.aop.PointCut;
 import com.alibaba.chaosblade.exec.common.aop.matcher.MethodInfo;
 import com.alibaba.chaosblade.exec.common.aop.matcher.clazz.ClassMatcher;
 import com.alibaba.chaosblade.exec.common.aop.matcher.clazz.NameClassMatcher;
+import com.alibaba.chaosblade.exec.common.aop.matcher.clazz.OrClassMatcher;
 import com.alibaba.chaosblade.exec.common.aop.matcher.method.MethodMatcher;
 import com.alibaba.chaosblade.exec.plugin.mercury.MercuryConstant;
 import org.slf4j.Logger;
@@ -19,7 +20,10 @@ public class MercuryProducerPointCut implements PointCut, MercuryConstant {
 
     @Override
     public ClassMatcher getClassMatcher() {
-        return new NameClassMatcher(PRODUCER_CLASS);
+        OrClassMatcher orClassMatcher = new OrClassMatcher();
+        orClassMatcher.or(new NameClassMatcher(KAFKA_PRODUCER_CLASS))
+                .or(new NameClassMatcher(RABBITMQ_PRODUCER_CLASS));
+        return orClassMatcher;
     }
 
     @Override
@@ -27,7 +31,8 @@ public class MercuryProducerPointCut implements PointCut, MercuryConstant {
         return new MethodMatcher() {
             @Override
             public boolean isMatched(String methodName, MethodInfo methodInfo) {
-                return methodName.equals(SEND) && methodInfo.getParameterTypes().length == 2;
+                return methodName.equals(SEND)
+                        || methodName.equals(SEND_BATCH);
             }
         };
     }
