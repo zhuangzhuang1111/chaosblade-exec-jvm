@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
 import java.util.*;
 
 /**
- * @author ljzhxx@gmail.com
+ * @author lizhaunzhuang@tuhu.cn
  */
 public class MercuryConsumerEnhancer extends BeforeEnhancer implements MercuryConstant {
 
@@ -26,12 +26,19 @@ public class MercuryConsumerEnhancer extends BeforeEnhancer implements MercuryCo
             return null;
         }
 
-        Object subscriptionName = ReflectUtil.getFieldValue(object, "subscription", false);
         MatcherModel matcherModel = new MatcherModel();
+        // kafka differ with rmq
+        Object subscriptionName = null;
+        if (method.getName().equals(KAFKA_CONSUME_METHOD)) {
+            // truth-south "subscription"
+            subscriptionName = ReflectUtil.getFieldValue(object, "subscription", false);
+        } else if(method.getName().equals(RMQ_CONSUME_METHOD)){
+            Object metaData = ReflectUtil.getFieldValue(object, "metaData", false);
+            subscriptionName = ReflectUtil.getFieldValue(metaData, "resourceName", false);
+        }
         if (subscriptionName != null && !subscriptionName.equals("")) {
             matcherModel.add(RESOURCE_NAME, subscriptionName);
         }
-
         EnhancerModel enhancerModel = new EnhancerModel(classLoader, matcherModel);
         enhancerModel.addMatcher(CONSUMER_KEY, "true");
         return enhancerModel;

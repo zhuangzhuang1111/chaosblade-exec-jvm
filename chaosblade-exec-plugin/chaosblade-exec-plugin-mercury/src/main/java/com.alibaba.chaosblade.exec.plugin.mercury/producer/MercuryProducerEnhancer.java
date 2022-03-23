@@ -26,7 +26,7 @@ public class MercuryProducerEnhancer extends BeforeEnhancer implements MercuryCo
         }
 
         Object metadata = ReflectUtil.getFieldValue(object, "metaData", false);
-        String resourceName = ReflectUtil.getFieldValue(metadata, "resourceName", false);
+        String resourceName = ReflectUtil.getSuperclassFieldValue(metadata, "resourceName", false);
         MatcherModel matcherModel = new MatcherModel();
         matcherModel.add(RESOURCE_NAME, resourceName);
         if (LOGGER.isDebugEnabled()) {
