@@ -15,7 +15,7 @@ public class RenaultCmdMatcherSpec extends BasePredicateMatcherSpec {
 
     @Override
     public String getDesc() {
-        return "cmd matcher";
+        return "cmd matcher,support set(set,mset)/get(get，mget)";
     }
 
     @Override

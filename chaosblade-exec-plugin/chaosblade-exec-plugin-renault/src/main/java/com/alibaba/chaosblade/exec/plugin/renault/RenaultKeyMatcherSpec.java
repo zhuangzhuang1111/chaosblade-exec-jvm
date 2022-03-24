@@ -14,7 +14,7 @@ public class RenaultKeyMatcherSpec extends BasePredicateMatcherSpec {
 
     @Override
     public String getDesc() {
-        return "key matcher";
+        return "category matcher,same with renault category";
     }
 
     @Override

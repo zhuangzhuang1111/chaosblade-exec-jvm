@@ -6,20 +6,15 @@ package com.alibaba.chaosblade.exec.plugin.renault;
  */
 public class RenaultConstants {
 
-    public final static String KEY = "key";
-    public final static String VALUE = "value";
+    public final static String KEY = "category";
     public final static String CMD = "cmd";
-
-    //public final static String CLASS = "io.lettuce.core.protocol.CommandHandler";
-    //public final static String METHOD = "write";
 
     /**
      * Renault 对读写进行拦截
      */
-    public final static String RENAULT_CLASS = "com.tuhu.renault.remote.AbstractRemoteCache";
-    //public final static String RENAULT_CLASS = "com.tuhu.renault.redis.lettuce.LettuceCache";
-    public final static String GET_METHOD = "do_GET";
-    public final static String MULTI_GET_METHOD = "do_MULTI_GET";
-    public final static String SET = "do_SET";
-    public final static String MULTI_SET_METHOD = "do_MULTI_SET";
+    public final static String RENAULT_CLASS = "io.lettuce.core.AbstractRedisAsyncCommands";
+    public final static String GET_METHOD = "get";
+    public final static String MULTI_GET_METHOD = "mget";
+    public final static String SET = "set";
+    public final static String MULTI_SET_METHOD = "mset";
 }

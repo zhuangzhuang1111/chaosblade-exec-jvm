@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Method;
 import java.util.*;
 
-/**
+/**w
  * @author lizhaunzhuang@tuhu.cn
  */
 public class MercuryConsumerEnhancer extends BeforeEnhancer implements MercuryConstant {

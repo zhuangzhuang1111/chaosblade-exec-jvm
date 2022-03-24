@@ -3,12 +3,12 @@ package com.alibaba.chaosblade.exec.plugin.renault;
 import com.alibaba.chaosblade.exec.common.aop.BeforeEnhancer;
 import com.alibaba.chaosblade.exec.common.aop.EnhancerModel;
 import com.alibaba.chaosblade.exec.common.model.matcher.MatcherModel;
+import com.alibaba.chaosblade.exec.common.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 
 import static com.alibaba.chaosblade.exec.plugin.renault.RenaultConstants.*;
 
@@ -26,24 +26,6 @@ public class RenaultEnhancer extends BeforeEnhancer {
                                         Object object,
                                         Method method,
                                         Object[] methodArguments) throws Exception {
-
-/*        Object command = methodArguments[1];
-        Object args = ReflectUtil.getFieldValue(command, "command", false);
-        Object commandType = ReflectUtil.getFieldValue(args, "type", false);
-
-        Object commandArgs = ReflectUtil.getFieldValue(args, "args", false);
-        List singularArguments = ReflectUtil.getFieldValue(commandArgs, "singularArguments", false);
-        Object keyArgument = singularArguments.get(0);
-        MatcherModel matcherModel = new MatcherModel();
-        if (keyArgument == null) {
-            return null;
-        }
-        Object key = ReflectUtil.getFieldValue(keyArgument, "key", false);
-        matcherModel.add(KEY, key);
-        matcherModel.add(CMD, commandType);
-        logger.debug("lettuce matchers: {}", JsonUtil.writer().writeValueAsString(matcherModel));
-        return new EnhancerModel(classLoader, matcherModel);
-    }*/
         /**
          * MatcherModel
          * renault
@@ -51,26 +33,29 @@ public class RenaultEnhancer extends BeforeEnhancer {
          *    set:set\setAsync get:getAsync  key:xx
          */
         MatcherModel matcherModel = new MatcherModel();
-        HashSet<Object> keySet = new HashSet();
-        if (method.getName().contains("GET")) {
-            if (method.getName().equals(MULTI_GET_METHOD)) {
-                keySet = (HashSet<Object>) methodArguments[0];
-            } else {
-                keySet.add(methodArguments[0]);
-            }
-            matcherModel.add(CMD, "GET");
-        } else if (method.getName().contains("SET")) {
-            if (method.getName().equals(MULTI_SET_METHOD)) {
-                HashMap<Object, Object> setData = (HashMap<Object, Object>) methodArguments[0];
-                keySet = (HashSet<Object>) setData.keySet();
-            } else {
-                keySet.add(methodArguments[0]);
-            }
-            matcherModel.add(CMD, "SET");
+        List<String> keyList = new ArrayList<String>();
+        String beforeArgument = "";
+        if (method.getName().equals("get")) {
+            beforeArgument = (String) methodArguments[0];
+            matcherModel.add(CMD, "get");
+        } else if (method.getName().equals("mget")) {
+            String[] methodArgument = (String[]) methodArguments[0];
+            beforeArgument = methodArgument[0];
+            matcherModel.add(CMD, "get");
+        } else if (method.getName().equals("set")) {
+            beforeArgument = (String) methodArguments[0];
+            matcherModel.add(CMD, "set");
+        } else if (method.getName().equals("mset")) {
+            HashMap<Object, Object> setData = (HashMap<Object, Object>) methodArguments[0];
+            beforeArgument = new ArrayList<String>((HashSet) setData.keySet()).get(0);
+            matcherModel.add(CMD, "set");
         }
-
+        if (StringUtils.isBlank(beforeArgument)) {
+            String category = beforeArgument.substring(0, beforeArgument.indexOf(":"));
+            keyList.add(category);
+        }
         EnhancerModel enhancerModel = new EnhancerModel(classLoader, matcherModel);
-        enhancerModel.addCustomMatcher(KEY, keySet, RenaultParamsMatcher.getInstance());
+        enhancerModel.addCustomMatcher(KEY, keyList, RenaultParamsMatcher.getInstance());
         return enhancerModel;
     }
 }
