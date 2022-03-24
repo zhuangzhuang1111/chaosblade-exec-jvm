@@ -16,5 +16,6 @@ public class RenaultConstants {
     public final static String GET_METHOD = "get";
     public final static String MULTI_GET_METHOD = "mget";
     public final static String SET = "set";
+    public final static String SET_2 = "psetex";
     public final static String MULTI_SET_METHOD = "mset";
 }

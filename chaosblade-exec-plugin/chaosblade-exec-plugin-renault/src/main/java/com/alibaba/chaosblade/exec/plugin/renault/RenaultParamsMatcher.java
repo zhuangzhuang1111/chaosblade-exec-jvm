@@ -11,6 +11,7 @@ import com.alibaba.chaosblade.exec.common.aop.CustomMatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
@@ -31,8 +32,8 @@ public class RenaultParamsMatcher implements CustomMatcher {
     }
     @Override
     public boolean match(String commandValue, Object originValue) {
-        HashSet<Object> keySet = (HashSet<Object>) originValue;
-        return keySet.contains(commandValue);
+        ArrayList<Object> keyList = (ArrayList<Object>) originValue;
+        return keyList.contains(commandValue);
     }
 
     @Override

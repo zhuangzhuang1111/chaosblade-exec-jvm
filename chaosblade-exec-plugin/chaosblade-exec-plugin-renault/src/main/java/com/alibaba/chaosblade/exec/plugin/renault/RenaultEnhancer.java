@@ -39,10 +39,16 @@ public class RenaultEnhancer extends BeforeEnhancer {
             beforeArgument = (String) methodArguments[0];
             matcherModel.add(CMD, "get");
         } else if (method.getName().equals("mget")) {
-            String[] methodArgument = (String[]) methodArguments[0];
-            beforeArgument = methodArgument[0];
+            Iterator it = (Iterator) methodArguments[0];
+            Object next = it.next();
+            if (next != null) {
+                beforeArgument = (String) next;
+            }
             matcherModel.add(CMD, "get");
         } else if (method.getName().equals("set")) {
+            beforeArgument = (String) methodArguments[0];
+            matcherModel.add(CMD, "set");
+        } else if (method.getName().equals(SET_2)) {
             beforeArgument = (String) methodArguments[0];
             matcherModel.add(CMD, "set");
         } else if (method.getName().equals("mset")) {
@@ -50,9 +56,12 @@ public class RenaultEnhancer extends BeforeEnhancer {
             beforeArgument = new ArrayList<String>((HashSet) setData.keySet()).get(0);
             matcherModel.add(CMD, "set");
         }
-        if (StringUtils.isBlank(beforeArgument)) {
-            String category = beforeArgument.substring(0, beforeArgument.indexOf(":"));
-            keyList.add(category);
+        if (StringUtils.isNotBlank(beforeArgument)) {
+            int index = beforeArgument.indexOf(":");
+            if (index != -1) { // 原生的可能没有
+                String category = beforeArgument.substring(0, beforeArgument.indexOf(":"));
+                keyList.add(category);
+            }
         }
         EnhancerModel enhancerModel = new EnhancerModel(classLoader, matcherModel);
         enhancerModel.addCustomMatcher(KEY, keyList, RenaultParamsMatcher.getInstance());

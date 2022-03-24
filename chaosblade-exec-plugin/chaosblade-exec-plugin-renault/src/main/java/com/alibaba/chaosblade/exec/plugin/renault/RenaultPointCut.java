@@ -14,7 +14,9 @@ public class RenaultPointCut implements PointCut {
 
     @Override
     public ClassMatcher getClassMatcher() {
-        return new SuperClassMatcher(RenaultConstants.RENAULT_CLASS);
+        /*return new OrClassMatcher().or(new NameClassMatcher(RenaultConstants.RENAULT_REDIS_CLASS)).
+                or(new NameClassMatcher(RenaultConstants.RENAULT_HBASE_CLASS));*/
+        return new NameClassMatcher(RenaultConstants.RENAULT_CLASS);
     }
 
     /**
@@ -34,8 +36,9 @@ public class RenaultPointCut implements PointCut {
                                 * */
                                 (methodName.equals(RenaultConstants.MULTI_GET_METHOD)
                                         && methodInfo.getParameterTypes().length == 1
-                                        && methodInfo.getParameterTypes()[0].equals("java.lang.Object[]")) ||
+                                        && methodInfo.getParameterTypes()[0].equals("java.lang.Iterator")) ||
                                 (methodName.equals(RenaultConstants.SET)) ||
+                                (methodName.equals(RenaultConstants.SET_2))||
                                 (methodName.equals(RenaultConstants.MULTI_SET_METHOD)
                                 );
             }
