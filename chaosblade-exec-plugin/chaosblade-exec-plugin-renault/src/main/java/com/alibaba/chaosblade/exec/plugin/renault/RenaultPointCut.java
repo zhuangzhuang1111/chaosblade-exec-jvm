@@ -14,9 +14,9 @@ public class RenaultPointCut implements PointCut {
 
     @Override
     public ClassMatcher getClassMatcher() {
-        /*return new OrClassMatcher().or(new NameClassMatcher(RenaultConstants.RENAULT_REDIS_CLASS)).
-                or(new NameClassMatcher(RenaultConstants.RENAULT_HBASE_CLASS));*/
-        return new NameClassMatcher(RenaultConstants.RENAULT_CLASS);
+        return new OrClassMatcher().or(new NameClassMatcher(RenaultConstants.RENAULT_CLASS)).
+            or(new NameClassMatcher(RenaultConstants.RENAULT_HBASE_CLASS));
+        //return new NameClassMatcher(RenaultConstants.RENAULT_CLASS);
     }
 
     /**
@@ -35,11 +35,18 @@ public class RenaultPointCut implements PointCut {
                                 *
                                 * */
                                 (methodName.equals(RenaultConstants.MULTI_GET_METHOD)
-                                        && methodInfo.getParameterTypes().length == 1
-                                        && methodInfo.getParameterTypes()[0].equals("java.lang.Iterator")) ||
+                                && methodInfo.getParameterTypes().length == 1
+                                && methodInfo.getParameterTypes()[0].equals("java.lang.Iterable")) ||
                                 (methodName.equals(RenaultConstants.SET)) ||
                                 (methodName.equals(RenaultConstants.SET_2))||
-                                (methodName.equals(RenaultConstants.MULTI_SET_METHOD)
+                                (methodName.equals(RenaultConstants.MULTI_SET_METHOD) ||
+                                // hbase method below
+                                (methodName.equals(RenaultConstants.HBASE_GET)) ||
+                                (methodName.equals(RenaultConstants.HBASE_GET_COLUMN)) ||
+                                (methodName.equals(RenaultConstants.HBASE_MULTI_GET)) ||
+                                (methodName.equals(RenaultConstants.HBASE_PUT)) ||
+                                (methodName.equals(RenaultConstants.HBASE_PUT_COLUMN)) ||
+                                (methodName.equals(RenaultConstants.HBASE_MULTI_PUT))
                                 );
             }
         };
